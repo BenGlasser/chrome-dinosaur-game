@@ -53,9 +53,9 @@ let birdArray = [];
 let birdWidth = 97;       //match bird1.png width — canonical hitbox even when bird2 (93×62) is rendered
 let birdHeight = 68;      //match bird1.png height
 
-let birdLowY = 110;       //must-duck height — bird occupies y∈[110,178]; misses ducking dino at [190,250]
-let birdMidY = 156;       //must-jump height — bird occupies y∈[156,224]; aligned with standing dino top
-let birdHighY = 50;       //don't-jump height — bird occupies y∈[50,118]; punishes reflexive jumping
+let birdLowY = 130;       //must-duck height — bird hits standing dino head, misses ducking dino (insets recalibrated)
+let birdMidY = 160;       //must-jump height — overlaps both standing and ducking; only apex jump clears
+let birdHighY = 80;       //don't-jump height — passes over standing/ducking, but jump apex gets caught
 
 let bird1Img;
 let bird2Img;
@@ -72,11 +72,9 @@ let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collisi
 let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
 //collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect per side (drawImage stays at full sprite size)
-//dino sprite (88×94 run/jump, 118×60 duck): main padding is on the right (tail/back) and bottom (feet aren't at PNG bottom)
-let dinoInsetLeft = 4;
-let dinoInsetTop = 0;
-let dinoInsetRight = 12;
-let dinoInsetBottom = 12;
+//dino has two very different sprite shapes (88×94 standing vs 118×60 ducking), so insets are per-state
+let dinoStandingHit = { left: 22, top: 28, right: 8, bottom: 4 }; //run/jump/dead — visible body sits in the lower-right of 88×94
+let dinoDuckHit     = { left: 4,  top: 4,  right: 8, bottom: 4 }; //duck — body fills most of 118×60
 //cactus sprites: minor side padding only
 let cactusInsetLeft = 4;
 let cactusInsetTop = 0;
@@ -204,7 +202,8 @@ function update() {
     else if (dinoState == "ducking") dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoDuck1Img : dinoDuck2Img;
     else /* running */               dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoRun1Img  : dinoRun2Img;
     context.drawImage(dinoSprite, dino.x, dino.y, dino.width, dino.height);
-    let dinoHit = hitbox(dino, dinoInsetLeft, dinoInsetTop, dinoInsetRight, dinoInsetBottom);
+    let dinoIn = (dinoState == "ducking") ? dinoDuckHit : dinoStandingHit;
+    let dinoHit = hitbox(dino, dinoIn.left, dinoIn.top, dinoIn.right, dinoIn.bottom);
     drawHitbox(dinoHit, "red");
 
     //cactus
