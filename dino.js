@@ -68,6 +68,7 @@ let jumpVelocity = -9; //initial upward velocity on jump
 
 let gameOver = false;
 let score = 0;
+let highScore = 0; //persisted to localStorage as "dinoHighScore"; loaded in window.onload, written on each new high
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
 let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
@@ -139,6 +140,8 @@ window.onload = function() {
 
     track1 = { img: trackImg, x: trackX,              y: trackY, width: trackWidth, height: trackHeight };
     track2 = { img: trackImg, x: trackX + trackWidth, y: trackY, width: trackWidth, height: trackHeight };
+
+    highScore = parseInt(localStorage.getItem("dinoHighScore")) || 0; //persisted across reloads
 
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
@@ -248,7 +251,11 @@ function update() {
     context.fillStyle="black";
     context.font="20px courier";
     score++;
-    context.fillText(score, 5, 20);
+    if (gameOver && score > highScore) {
+        highScore = score;
+        localStorage.setItem("dinoHighScore", highScore);
+    }
+    context.fillText("HI: " + highScore + "   " + score, 5, 20);
 
     //game-over overlay — drawn last so it sits on top; persists because update() early-returns on next frame
     if (gameOver) {
