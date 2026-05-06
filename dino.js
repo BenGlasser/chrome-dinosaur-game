@@ -73,8 +73,8 @@ let spawnSeparation = 350; //min px between a cactus and a bird at spawn time �
 
 //collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect per side (drawImage stays at full sprite size)
 //dino has two very different sprite shapes (88×94 standing vs 118×60 ducking), so insets are per-state
-let dinoStandingHit = { left: 22, top: 28, right: 8, bottom: 4 }; //run/jump/dead — visible body sits in the lower-right of 88×94
-let dinoDuckHit     = { left: 4,  top: 4,  right: 8, bottom: 4 }; //duck — body fills most of 118×60
+let dinoStandingHit = { left: 12, top: 12, right: 12, bottom: 12 }; //run/jump/dead — symmetric so box stays centered on the visible body
+let dinoDuckHit     = { left: 4,  top: 4,  right: 8,  bottom: 4 };  //duck — body fills most of 118×60
 //cactus sprites: minor side padding only
 let cactusInsetLeft = 4;
 let cactusInsetTop = 0;
