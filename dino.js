@@ -255,7 +255,7 @@ function update() {
         highScore = score;
         localStorage.setItem("dinoHighScore", highScore);
     }
-    context.fillText("HI: " + highScore + "   " + score, 5, 20);
+    context.fillText("High Score: " + highScore + "                                 Score: " + score, 5, 20);
 
     //game-over overlay — drawn last so it sits on top; persists because update() early-returns on next frame
     if (gameOver) {
