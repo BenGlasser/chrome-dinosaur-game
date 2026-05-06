@@ -47,6 +47,19 @@ let cactus1Img;
 let cactus2Img;
 let cactus3Img;
 
+//bird
+let birdArray = [];
+
+let birdWidth = 97;       //match bird1.png width — canonical hitbox even when bird2 (93×62) is rendered
+let birdHeight = 68;      //match bird1.png height
+
+let birdLowY = 110;       //must-duck height — bird occupies y∈[110,178]; misses ducking dino at [190,250]
+let birdMidY = 156;       //must-jump height — bird occupies y∈[156,224]; aligned with standing dino top
+let birdHighY = 50;       //don't-jump height — bird occupies y∈[50,118]; punishes reflexive jumping
+
+let bird1Img;
+let bird2Img;
+
 //physics
 let velocityX = -8; //cactus moving left speed
 let velocityY = 0;
@@ -97,6 +110,12 @@ window.onload = function() {
     cactus3Img = new Image();
     cactus3Img.src = "./img/cactus3.png";
 
+    bird1Img = new Image();
+    bird1Img.src = "./img/bird1.png";
+
+    bird2Img = new Image();
+    bird2Img.src = "./img/bird2.png";
+
     trackImg = new Image();
     trackImg.src = "./img/track.png";
 
@@ -105,6 +124,7 @@ window.onload = function() {
 
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
+    setInterval(placeBird, 1500); //birds spawn every 1.5 seconds
     document.addEventListener("keydown", moveDino);
     document.addEventListener("keyup", keyUp);
 }
