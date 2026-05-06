@@ -110,6 +110,7 @@ window.onload = function() {
 }
 
 function update() {
+    frameCount++;
     requestAnimationFrame(update);
     if (gameOver) {
         return;
@@ -128,10 +129,41 @@ function update() {
     context.drawImage(track1.img, track1.x, track1.y, track1.width, track1.height);
     context.drawImage(track2.img, track2.x, track2.y, track2.width, track2.height);
 
-    //dino
-    velocityY += gravity;
-    dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
-    context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+    //dino — state machine: derive state, apply hitbox dims, gravity (skip while ducking), pick sprite, draw
+    if (gameOver) {
+        dinoState = "dead";
+    } else if (dino.y < dinoY) {
+        dinoState = "jumping";
+    } else if (isDuckHeld) {
+        dinoState = "ducking";
+    } else {
+        dinoState = "running";
+    }
+
+    if (dinoState == "ducking") {
+        dino.width = duckWidth;
+        dino.height = duckHeight;
+        dino.y = duckY;
+    } else {
+        dino.width = dinoWidth;
+        dino.height = dinoHeight;
+        //do NOT touch dino.y here — gravity owns it for non-ducking states
+    }
+
+    //gravity — skip while ducking; running gravity with a duckY=190 dino.y would clamp it back UP to dinoY=156 (Math.min(190+v, 156)=156), teleporting the duck dino upward by 34px
+    if (dinoState != "ducking") {
+        velocityY += gravity;
+        dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity, clamp to ground
+    } else {
+        velocityY = 0; //zero accumulated velocity so stand-up doesn't launch the dino
+    }
+
+    let dinoSprite;
+    if (dinoState == "dead")         dinoSprite = dinoDeadImg;
+    else if (dinoState == "jumping") dinoSprite = dinoJumpImg;
+    else if (dinoState == "ducking") dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoDuck1Img : dinoDuck2Img;
+    else /* running */               dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoRun1Img  : dinoRun2Img;
+    context.drawImage(dinoSprite, dino.x, dino.y, dino.width, dino.height);
 
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
@@ -141,10 +173,8 @@ function update() {
 
         if (detectCollision(dino, cactus)) {
             gameOver = true;
-            dinoImg.src = "./img/dino-dead.png";
-            dinoImg.onload = function() {
-                context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-            }
+            //draw the dead sprite same-frame; subsequent frames early-return before clearRect, so this paint persists
+            context.drawImage(dinoDeadImg, dino.x, dino.y, dino.width, dino.height);
         }
     }
 
