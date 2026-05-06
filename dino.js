@@ -58,7 +58,7 @@ window.onload = function() {
 
     context = board.getContext("2d"); //used for drawing on the board
 
-    //draw initial dinosaur
+    // draw initial dinosaur
     // context.fillStyle="green";
     // context.fillRect(dino.x, dino.y, dino.width, dino.height);
 
@@ -184,6 +184,15 @@ function placeCactus() {
     if (cactusArray.length > 5) {
         cactusArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
     }
+}
+
+function resetGame() {
+    gameOver = false;
+    score = 0;
+    cactusArray = [];
+    velocityY = 0;
+    dino.y = dinoY;
+    dinoImg.src = "./img/dino.png";
 }
 
 function detectCollision(a, b) {
