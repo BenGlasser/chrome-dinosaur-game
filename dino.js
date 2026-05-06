@@ -61,13 +61,14 @@ let bird1Img;
 let bird2Img;
 
 //physics
-let velocityX = -6; //world scroll speed (cacti, track, birds — all read this)
+let velocityX = -5; //world scroll speed (cacti, track, birds — all read this)
 let velocityY = 0;
 let gravity = .4;
 
 let gameOver = false;
 let score = 0;
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
+let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
 //track
 let trackImg;
@@ -256,6 +257,11 @@ function placeCactus() {
         return;
     }
 
+    //skip if a bird is still in the spawn zone — prevents unwinnable cross-type stacks
+    for (let i = 0; i < birdArray.length; i++) {
+        if (birdArray[i].x > cactusX - spawnSeparation) return;
+    }
+
     //place cactus
     let cactus = {
         img : null,
@@ -291,6 +297,11 @@ function placeCactus() {
 function placeBird() {
     if (gameOver) {
         return;
+    }
+
+    //skip if a cactus is still in the spawn zone — prevents unwinnable cross-type stacks
+    for (let i = 0; i < cactusArray.length; i++) {
+        if (cactusArray[i].x > cactusX - spawnSeparation) return;
     }
 
     //place bird
