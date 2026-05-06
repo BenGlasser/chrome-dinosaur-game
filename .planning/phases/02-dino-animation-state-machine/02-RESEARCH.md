@@ -634,9 +634,11 @@ All four constants must remain exactly as they are. Phase 2 adds a conditional g
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-### Q1: How to verify DINO-04's hitbox clearance (ROADMAP success criterion #4)
+### Q1: How to verify DINO-04's hitbox clearance (ROADMAP success criterion #4) — **RESOLVED**
+
+**Resolution:** Option (c) — calculation-based verification. Duck AABB is `{y: 190, height: 60}` (occupies y ∈ [190, 250]); standing AABB is `{y: 156, height: 94}` (occupies y ∈ [156, 250]). Any obstacle with bottom edge at or above y=190 clears the ducking dino but collides with the standing dino. Phase 2 verifies the hitbox IS correctly sized via grep + manual visual confirmation; empirical low-obstacle confirmation deferred to Phase 3 (BIRD-03) when real low obstacles exist. Plan 02-03 documents this in its verification block.
 
 **What we know:** ROADMAP success criterion #4 requires: "A test obstacle drawn at 'low height' (clearance designed for ducking) does not collide with the dino while it is ducking, but does collide while it is standing."
 
