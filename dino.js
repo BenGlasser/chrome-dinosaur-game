@@ -63,7 +63,8 @@ let bird2Img;
 //physics
 let velocityX = -4; //world scroll speed (cacti, track, birds — all read this)
 let velocityY = 0;
-let gravity = .4;
+let gravity = .3;
+let jumpVelocity = -9; //initial upward velocity on jump
 
 let gameOver = false;
 let score = 0;
@@ -81,11 +82,11 @@ let cactusInsetLeft = 4;
 let cactusInsetTop = 0;
 let cactusInsetRight = 4;
 let cactusInsetBottom = 0;
-//bird sprites (97×68 / 93×62): symmetric padding; canonical hitbox locked at 97×68 per Phase 3 D-08
-let birdInsetLeft = 4;
-let birdInsetTop = 4;
-let birdInsetRight = 8;
-let birdInsetBottom = 4;
+//bird sprites (97×68 / 93×62): canonical hitbox locked at 97×68 per Phase 3 D-08; tight inset on wings + tail tip
+let birdInsetLeft = 8;
+let birdInsetTop = 8;
+let birdInsetRight = 12;
+let birdInsetBottom = 8;
 
 //track
 let trackImg;
@@ -264,7 +265,7 @@ function moveDino(e) {
 
     if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
         //jump
-        velocityY = -10;
+        velocityY = jumpVelocity;
     }
     else if (e.code == "ArrowDown") {
         isDuckHeld = true;
