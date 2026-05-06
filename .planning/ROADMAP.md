@@ -12,7 +12,7 @@ The v1.0 milestone — **sprite animations** — brings the existing static-spri
 
 - [x] **Phase 1: Scrolling track & restart** — Tiled scrolling ground replaces the flat background; any-key restart after game over. (completed 2026-05-06)
 - [x] **Phase 2: Dino animation & state machine** — Dino runs, jumps, and ducks with the right sprite for each state; ducking shrinks the hitbox. (completed 2026-05-06)
-- [ ] **Phase 3: Bird obstacles** — Birds spawn at multiple heights, flap, and end the game on collision; at least one height requires ducking.
+- [x] **Phase 3: Bird obstacles** — Birds spawn at multiple heights, flap, and end the game on collision; at least one height requires ducking. (completed 2026-05-06)
 
 ## Phase Details
 
@@ -59,10 +59,10 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 03-01: Bird entity model + spawning at multiple heights + scroll integration
+- [x] 03-01: Bird entity model + spawning at multiple heights + scroll integration
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 03-02: Bird sprite-cycle animation + collision wiring into existing game-over path
+- [x] 03-02: Bird sprite-cycle animation + collision wiring into existing game-over path
 
 ## Progress
 
@@ -73,4 +73,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Scrolling track & restart | 2/2 | Complete    | 2026-05-06 |
 | 2. Dino animation & state machine | 3/3 | Complete    | 2026-05-06 |
-| 3. Bird obstacles | 0/2 | Not started | — |
+| 3. Bird obstacles | 2/2 | Complete   | 2026-05-06 |
