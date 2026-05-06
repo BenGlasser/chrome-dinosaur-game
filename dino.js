@@ -61,7 +61,7 @@ let bird1Img;
 let bird2Img;
 
 //physics
-let velocityX = -5; //world scroll speed (cacti, track, birds — all read this)
+let velocityX = -4; //world scroll speed (cacti, track, birds — all read this)
 let velocityY = 0;
 let gravity = .4;
 
@@ -196,6 +196,10 @@ function update() {
         drawHitbox(cactus, "lime");
 
         if (detectCollision(dino, cactus)) {
+            console.log("[collision] cactus", {frame: frameCount, score: score, state: dinoState,
+                dino: {x: dino.x, y: dino.y, w: dino.width, h: dino.height},
+                cactus: {x: cactus.x, y: cactus.y, w: cactus.width, h: cactus.height},
+                gap: {x: cactus.x - (dino.x + dino.width), y: cactus.y - (dino.y + dino.height)}});
             gameOver = true;
             //draw the dead sprite same-frame; subsequent frames early-return before clearRect, so this paint persists
             context.drawImage(dinoDeadImg, dino.x, dino.y, dino.width, dino.height);
@@ -212,6 +216,10 @@ function update() {
         drawHitbox(bird, "cyan");
 
         if (detectCollision(dino, bird)) {
+            console.log("[collision] bird", {frame: frameCount, score: score, state: dinoState,
+                dino: {x: dino.x, y: dino.y, w: dino.width, h: dino.height},
+                bird: {x: bird.x, y: bird.y, w: bird.width, h: bird.height},
+                gap: {x: bird.x - (dino.x + dino.width), y: bird.y - (dino.y + dino.height)}});
             gameOver = true;
             //draw the dead sprite same-frame; subsequent frames early-return before clearRect, so this paint persists
             context.drawImage(dinoDeadImg, dino.x, dino.y, dino.width, dino.height);
