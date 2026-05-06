@@ -250,7 +250,11 @@ function resetGame() {
     cactusArray = [];
     velocityY = 0;
     dino.y = dinoY;
-    dinoImg.src = "./img/dino.png";
+    dinoState = "running";
+    isDuckHeld = false;
+    frameCount = 0;
+    dino.width = dinoWidth;   //restore standing hitbox in case the player died while ducking
+    dino.height = dinoHeight;
 }
 
 function detectCollision(a, b) {
