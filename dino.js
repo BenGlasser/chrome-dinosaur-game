@@ -70,13 +70,22 @@ let score = 0;
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
 let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
-//collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect (drawImage stays at full sprite size)
-let dinoInsetX = 8;
-let dinoInsetY = 4;
-let cactusInsetX = 2;
-let cactusInsetY = 0;
-let birdInsetX = 6;
-let birdInsetY = 6;
+//collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect per side (drawImage stays at full sprite size)
+//dino sprite (88×94 run/jump, 118×60 duck): main padding is on the right (tail/back) and bottom (feet aren't at PNG bottom)
+let dinoInsetLeft = 4;
+let dinoInsetTop = 0;
+let dinoInsetRight = 12;
+let dinoInsetBottom = 12;
+//cactus sprites: minor side padding only
+let cactusInsetLeft = 4;
+let cactusInsetTop = 0;
+let cactusInsetRight = 4;
+let cactusInsetBottom = 0;
+//bird sprites (97×68 / 93×62): symmetric padding; canonical hitbox locked at 97×68 per Phase 3 D-08
+let birdInsetLeft = 4;
+let birdInsetTop = 4;
+let birdInsetRight = 8;
+let birdInsetBottom = 4;
 
 //track
 let trackImg;
@@ -194,7 +203,7 @@ function update() {
     else if (dinoState == "ducking") dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoDuck1Img : dinoDuck2Img;
     else /* running */               dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoRun1Img  : dinoRun2Img;
     context.drawImage(dinoSprite, dino.x, dino.y, dino.width, dino.height);
-    let dinoHit = hitbox(dino, dinoInsetX, dinoInsetY);
+    let dinoHit = hitbox(dino, dinoInsetLeft, dinoInsetTop, dinoInsetRight, dinoInsetBottom);
     drawHitbox(dinoHit, "red");
 
     //cactus
@@ -202,7 +211,7 @@ function update() {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
-        let cactusHit = hitbox(cactus, cactusInsetX, cactusInsetY);
+        let cactusHit = hitbox(cactus, cactusInsetLeft, cactusInsetTop, cactusInsetRight, cactusInsetBottom);
         drawHitbox(cactusHit, "lime");
 
         if (detectCollision(dinoHit, cactusHit)) {
@@ -222,7 +231,7 @@ function update() {
 
         let birdSprite = (Math.floor(frameCount / 12) % 2 == 0) ? bird1Img : bird2Img;
         context.drawImage(birdSprite, bird.x, bird.y, bird.width, bird.height);
-        let birdHit = hitbox(bird, birdInsetX, birdInsetY);
+        let birdHit = hitbox(bird, birdInsetLeft, birdInsetTop, birdInsetRight, birdInsetBottom);
         drawHitbox(birdHit, "cyan");
 
         if (detectCollision(dinoHit, birdHit)) {
@@ -374,12 +383,12 @@ function detectCollision(a, b) {
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
 
-function hitbox(entity, insetX, insetY) {
+function hitbox(entity, left, top, right, bottom) {
     return {
-        x: entity.x + insetX,
-        y: entity.y + insetY,
-        width:  entity.width  - 2 * insetX,
-        height: entity.height - 2 * insetY
+        x: entity.x + left,
+        y: entity.y + top,
+        width:  entity.width  - left - right,
+        height: entity.height - top  - bottom
     };
 }
 
