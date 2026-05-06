@@ -67,6 +67,7 @@ let gravity = .4;
 
 let gameOver = false;
 let score = 0;
+let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
 
 //track
 let trackImg;
@@ -184,12 +185,14 @@ function update() {
     else if (dinoState == "ducking") dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoDuck1Img : dinoDuck2Img;
     else /* running */               dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoRun1Img  : dinoRun2Img;
     context.drawImage(dinoSprite, dino.x, dino.y, dino.width, dino.height);
+    drawHitbox(dino, "red");
 
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
+        drawHitbox(cactus, "lime");
 
         if (detectCollision(dino, cactus)) {
             gameOver = true;
@@ -205,6 +208,7 @@ function update() {
 
         let birdSprite = (Math.floor(frameCount / 12) % 2 == 0) ? bird1Img : bird2Img;
         context.drawImage(birdSprite, bird.x, bird.y, bird.width, bird.height);
+        drawHitbox(bird, "cyan");
 
         if (detectCollision(dino, bird)) {
             gameOver = true;
@@ -221,6 +225,11 @@ function update() {
 }
 
 function moveDino(e) {
+    if (e.code == "KeyD") { //debug toggle — runs in any game state, never restarts
+        debugHitbox = !debugHitbox;
+        return;
+    }
+
     if (gameOver) {
         resetGame();
         return;
@@ -335,4 +344,11 @@ function detectCollision(a, b) {
            a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
            a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
+}
+
+function drawHitbox(entity, color) {
+    if (!debugHitbox) return;
+    context.strokeStyle = color;
+    context.lineWidth = 2;
+    context.strokeRect(entity.x, entity.y, entity.width, entity.height);
 }
