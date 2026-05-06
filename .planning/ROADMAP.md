@@ -68,6 +68,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scrolling track & restart | 2/2 | Complete   | 2026-05-06 |
+| 1. Scrolling track & restart | 2/2 | Complete    | 2026-05-06 |
 | 2. Dino animation & state machine | 0/3 | Not started | — |
 | 3. Bird obstacles | 0/2 | Not started | — |
