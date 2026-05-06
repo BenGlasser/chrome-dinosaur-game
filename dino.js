@@ -61,7 +61,7 @@ let bird1Img;
 let bird2Img;
 
 //physics
-let velocityX = -8; //cactus moving left speed
+let velocityX = -6; //world scroll speed (cacti, track, birds — all read this)
 let velocityY = 0;
 let gravity = .4;
 
