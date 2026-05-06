@@ -10,7 +10,6 @@ let dinoWidth = 88;
 let dinoHeight = 94;
 let dinoX = 50;
 let dinoY = boardHeight - dinoHeight;
-let dinoImg;
 
 let dino = {
     x : dinoX,
@@ -18,6 +17,20 @@ let dino = {
     width : dinoWidth,
     height : dinoHeight
 }
+
+//phase 2 dino state
+let dinoRun1Img;
+let dinoRun2Img;
+let dinoJumpImg;
+let dinoDuck1Img;
+let dinoDuck2Img;
+let dinoDeadImg;
+let dinoState = "running"; //"running" | "jumping" | "ducking" | "dead" — derived per frame in update()
+let isDuckHeld = false;    //true while ArrowDown is held; set on keydown, cleared on keyup
+let frameCount = 0;        //incremented at top of update(); drives sprite cycling
+let duckWidth = 118;       //match dino-duck1.png width
+let duckHeight = 60;       //match dino-duck*.png height
+let duckY = boardHeight - duckHeight; //190 — ducking ground y
 
 //cactus
 let cactusArray = [];
@@ -62,11 +75,18 @@ window.onload = function() {
     // context.fillStyle="green";
     // context.fillRect(dino.x, dino.y, dino.width, dino.height);
 
-    dinoImg = new Image();
-    dinoImg.src = "./img/dino.png";
-    dinoImg.onload = function() {
-        context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-    }
+    dinoRun1Img = new Image();
+    dinoRun1Img.src = "./img/dino-run1.png";
+    dinoRun2Img = new Image();
+    dinoRun2Img.src = "./img/dino-run2.png";
+    dinoJumpImg = new Image();
+    dinoJumpImg.src = "./img/dino-jump.png";
+    dinoDuck1Img = new Image();
+    dinoDuck1Img.src = "./img/dino-duck1.png";
+    dinoDuck2Img = new Image();
+    dinoDuck2Img.src = "./img/dino-duck2.png";
+    dinoDeadImg = new Image();
+    dinoDeadImg.src = "./img/dino-dead.png";
 
     cactus1Img = new Image();
     cactus1Img.src = "./img/cactus1.png";
@@ -86,6 +106,7 @@ window.onload = function() {
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveDino);
+    document.addEventListener("keyup", keyUp);
 }
 
 function update() {
@@ -148,6 +169,12 @@ function moveDino(e) {
         //duck
     }
 
+}
+
+function keyUp(e) {
+    if (e.code == "ArrowDown") {
+        isDuckHeld = false;
+    }
 }
 
 function placeCactus() {
