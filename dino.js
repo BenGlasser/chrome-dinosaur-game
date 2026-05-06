@@ -95,6 +95,18 @@ function update() {
     }
     context.clearRect(0, 0, board.width, board.height);
 
+    //track
+    track1.x += velocityX;
+    track2.x += velocityX;
+    if (track1.x + track1.width <= 0) {
+        track1.x = track2.x + track2.width;
+    }
+    if (track2.x + track2.width <= 0) {
+        track2.x = track1.x + track1.width;
+    }
+    context.drawImage(track1.img, track1.x, track1.y, track1.width, track1.height);
+    context.drawImage(track2.img, track2.x, track2.y, track2.width, track2.height);
+
     //dino
     velocityY += gravity;
     dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
