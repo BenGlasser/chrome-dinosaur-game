@@ -303,6 +303,14 @@ function moveDino(e) {
         return;
     }
 
+    if (!gameStarted) {
+        if (e.code == "Space" || e.code == "ArrowUp") {
+            gameStarted = true;
+            velocityY = jumpVelocity; //first press doubles as the first jump — feels natural and matches the live-game branch
+        }
+        return; //ignore ArrowDown / other keys while idle (do NOT set isDuckHeld here)
+    }
+
     if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
         //jump
         velocityY = jumpVelocity;
@@ -322,6 +330,10 @@ function keyUp(e) {
 function placeCactus() {
     if (gameOver) {
         return;
+    }
+
+    if (!gameStarted) {
+        return; //start-gate idle: no spawning until first Space/ArrowUp press
     }
 
     //skip if a bird is still in the spawn zone — prevents unwinnable cross-type stacks
@@ -366,6 +378,10 @@ function placeBird() {
         return;
     }
 
+    if (!gameStarted) {
+        return; //start-gate idle: no spawning until first Space/ArrowUp press
+    }
+
     //skip if a cactus is still in the spawn zone — prevents unwinnable cross-type stacks
     for (let i = 0; i < cactusArray.length; i++) {
         if (cactusArray[i].x > cactusX - spawnSeparation) return;
@@ -405,6 +421,7 @@ function placeBird() {
 
 function resetGame() {
     gameOver = false;
+    gameStarted = false; //return to the start gate after death — every fresh life begins from "Press Space to Start"
     score = 0;
     cactusArray = [];
     birdArray = [];
