@@ -73,7 +73,7 @@ let spawnSeparation = 350; //min px between a cactus and a bird at spawn time �
 
 //collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect per side (drawImage stays at full sprite size)
 //dino has two very different sprite shapes (88×94 standing vs 118×60 ducking), so insets are per-state
-let dinoStandingHit = { left: 12, top: 12, right: 12, bottom: 12 }; //run/jump/dead — symmetric so box stays centered on the visible body
+let dinoStandingHit = { left: 20, top: 20, right: 22, bottom: 20 }; //run/jump/dead — symmetric so box stays centered on the visible body
 let dinoDuckHit     = { left: 4,  top: 4,  right: 8,  bottom: 4 };  //duck — body fills most of 118×60
 //cactus sprites: minor side padding only
 let cactusInsetLeft = 4;
@@ -81,10 +81,10 @@ let cactusInsetTop = 0;
 let cactusInsetRight = 4;
 let cactusInsetBottom = 0;
 //bird sprites (97×68 / 93×62): canonical hitbox locked at 97×68 per Phase 3 D-08; tight inset on wings + tail tip
-let birdInsetLeft = 8;
-let birdInsetTop = 8;
+let birdInsetLeft = 10;
+let birdInsetTop = 10;
 let birdInsetRight = 12;
-let birdInsetBottom = 8;
+let birdInsetBottom = 10;
 
 //track
 let trackImg;
@@ -258,7 +258,7 @@ function moveDino(e) {
     }
 
     if (gameOver) {
-        resetGame();
+        if (e.code == "KeyR") resetGame();
         return;
     }
 
