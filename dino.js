@@ -47,6 +47,19 @@ let cactus1Img;
 let cactus2Img;
 let cactus3Img;
 
+//bird
+let birdArray = [];
+
+let birdWidth = 97;       //match bird1.png width — canonical hitbox even when bird2 (93×62) is rendered
+let birdHeight = 68;      //match bird1.png height
+
+let birdLowY = 110;       //must-duck height — bird occupies y∈[110,178]; misses ducking dino at [190,250]
+let birdMidY = 156;       //must-jump height — bird occupies y∈[156,224]; aligned with standing dino top
+let birdHighY = 50;       //don't-jump height — bird occupies y∈[50,118]; punishes reflexive jumping
+
+let bird1Img;
+let bird2Img;
+
 //physics
 let velocityX = -8; //cactus moving left speed
 let velocityY = 0;
@@ -97,6 +110,12 @@ window.onload = function() {
     cactus3Img = new Image();
     cactus3Img.src = "./img/cactus3.png";
 
+    bird1Img = new Image();
+    bird1Img.src = "./img/bird1.png";
+
+    bird2Img = new Image();
+    bird2Img.src = "./img/bird2.png";
+
     trackImg = new Image();
     trackImg.src = "./img/track.png";
 
@@ -105,6 +124,7 @@ window.onload = function() {
 
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
+    setInterval(placeBird, 1500); //birds spawn every 1.5 seconds
     document.addEventListener("keydown", moveDino);
     document.addEventListener("keyup", keyUp);
 }
@@ -178,6 +198,13 @@ function update() {
         }
     }
 
+    //bird
+    for (let i = 0; i < birdArray.length; i++) {
+        let bird = birdArray[i];
+        bird.x += velocityX;
+        context.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height);
+    }
+
     //score
     context.fillStyle="black";
     context.font="20px courier";
@@ -241,6 +268,43 @@ function placeCactus() {
 
     if (cactusArray.length > 5) {
         cactusArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
+    }
+}
+
+function placeBird() {
+    if (gameOver) {
+        return;
+    }
+
+    //place bird
+    let bird = {
+        img : bird1Img,    //initial frame; the update() draw loop re-picks per-frame from frameCount (added in plan 03-02)
+        x : cactusX,       //reuse cactusX = 700 — both obstacle types enter from the right edge per D-04
+        y : 0,             //assigned below by the height roll
+        width : birdWidth,
+        height: birdHeight
+    }
+
+    let placeBirdChance = Math.random(); //0 - 0.9999...
+
+    if (placeBirdChance > .80) { //20% no bird — breathing room when a cactus stack would be unfair
+        return;
+    }
+    else if (placeBirdChance > .55) { //25% high (y=birdHighY) — punishes reflexive jumping
+        bird.y = birdHighY;
+        birdArray.push(bird);
+    }
+    else if (placeBirdChance > .30) { //25% mid (y=birdMidY) — must jump
+        bird.y = birdMidY;
+        birdArray.push(bird);
+    }
+    else { //30% low (y=birdLowY) — must duck (depends on Phase 2 D-14 hitbox shrink)
+        bird.y = birdLowY;
+        birdArray.push(bird);
+    }
+
+    if (birdArray.length > 5) {
+        birdArray.shift(); //count-based prune; safe at current scroll speed, see CONCERNS.md §"Latent Bugs" #1
     }
 }
 
