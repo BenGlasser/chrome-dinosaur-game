@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
+status: ready_to_plan
 stopped_at: Completed 02-dino-animation-state-machine 02-03-PLAN.md
 last_updated: "2026-05-06T02:27:12.973Z"
 last_activity: 2026-05-06
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 5
   completed_plans: 5
   percent: 100
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-05-05)
 
 ## Current Position
 
-Phase: 2 (Dino animation & state machine) — EXECUTING
-Plan: 3 of 3
-Status: Phase complete — ready for verification
+Phase: 3
+Plan: Not started
+Status: Ready to plan
 Last activity: 2026-05-06
 
 Progress: [██████████] 100%
@@ -36,7 +36,7 @@ Progress: [██████████] 100%
 
 **Velocity:**
 
-- Total plans completed: 2
+- Total plans completed: 5
 - Average duration: —
 - Total execution time: —
 
@@ -48,6 +48,7 @@ Progress: [██████████] 100%
 | 2. Dino animation & state machine | 0/3 | — | — |
 | 3. Bird obstacles | 0/2 | — | — |
 | 1 | 2 | - | - |
+| 2 | 3 | - | - |
 
 **Recent Trend:**
 
