@@ -67,6 +67,7 @@ let gravity = .3;
 let jumpVelocity = -9; //initial upward velocity on jump
 
 let gameOver = false;
+let gameStarted = false; //true after first Space/ArrowUp press; gates physics, spawning, and scoring — page loads into idle "Press Space to Start" gate
 let score = 0;
 let highScore = 0; //persisted to localStorage as "dinoHighScore"; loaded in window.onload, written on each new high
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
@@ -157,6 +158,30 @@ function update() {
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
+
+    //idle "start gate" — runs until first Space/ArrowUp press; static dino + static track + start prompt
+    if (!gameStarted) {
+        //draw the track at its current x (do NOT advance — world is paused)
+        context.drawImage(track1.img, track1.x, track1.y, track1.width, track1.height);
+        context.drawImage(track2.img, track2.x, track2.y, track2.width, track2.height);
+
+        //draw the dino as a single static run frame (not the cycling animation — implied motion contradicts "waiting")
+        context.drawImage(dinoRun1Img, dino.x, dino.y, dino.width, dino.height);
+
+        //score readout (still shows the persisted high score so the player sees their record)
+        context.fillStyle = "black";
+        context.font = "20px courier";
+        context.fillText("High Score: " + highScore + "                                 Score: " + score, 5, 20);
+
+        //centered start prompt — same fillStyle/font pattern as the game-over overlay
+        context.fillStyle = "black";
+        context.font = "bold 22px courier";
+        let startMsg = "Press Space to Start";
+        let startMsgWidth = context.measureText(startMsg).width;
+        context.fillText(startMsg, (boardWidth - startMsgWidth) / 2, 100);
+
+        return; //skip physics, spawning collision, score++ — RAF keeps re-firing this branch until gameStarted flips
+    }
 
     //track
     track1.x += velocityX;
