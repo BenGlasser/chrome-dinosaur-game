@@ -136,6 +136,7 @@ function update() {
 
 function moveDino(e) {
     if (gameOver) {
+        resetGame();
         return;
     }
 
