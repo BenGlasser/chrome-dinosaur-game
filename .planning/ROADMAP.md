@@ -10,7 +10,7 @@ The v1.0 milestone — **sprite animations** — brings the existing static-spri
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Scrolling track & restart** — Tiled scrolling ground replaces the flat background; any-key restart after game over.
+- [x] **Phase 1: Scrolling track & restart** — Tiled scrolling ground replaces the flat background; any-key restart after game over. (completed 2026-05-06)
 - [ ] **Phase 2: Dino animation & state machine** — Dino runs, jumps, and ducks with the right sprite for each state; ducking shrinks the hitbox.
 - [ ] **Phase 3: Bird obstacles** — Birds spawn at multiple heights, flap, and end the game on collision; at least one height requires ducking.
 
@@ -28,7 +28,7 @@ The v1.0 milestone — **sprite animations** — brings the existing static-spri
 
 Plans:
 - [x] 01-01: Tiled scrolling track render
-- [ ] 01-02: Game-state reset on any key after game over
+- [x] 01-02: Game-state reset on any key after game over
 
 ### Phase 2: Dino animation & state machine
 **Goal**: The dino plays the correct sprite for each gameplay state — running, jumping, ducking — and its collision hitbox tracks the visual state (smaller while ducking) so a low obstacle can be cleared by ducking.
@@ -68,6 +68,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scrolling track & restart | 1/2 | In Progress|  |
+| 1. Scrolling track & restart | 2/2 | Complete   | 2026-05-06 |
 | 2. Dino animation & state machine | 0/3 | Not started | — |
 | 3. Bird obstacles | 0/2 | Not started | — |

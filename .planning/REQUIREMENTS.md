@@ -27,7 +27,7 @@ Requirements for the **v1.0 milestone — sprite animations**. Each maps to a ro
 
 ### Restart
 
-- [ ] **RESTART-01**: After the game-over state, pressing any key resets the game state (dino back to running, obstacles cleared, score zeroed) and starts a new run without a page reload.
+- [x] **RESTART-01**: After the game-over state, pressing any key resets the game state (dino back to running, obstacles cleared, score zeroed) and starts a new run without a page reload.
 
 ## v2 Requirements
 
@@ -67,7 +67,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | BG-01       | Phase 1 — Scrolling track & restart | Complete |
-| RESTART-01  | Phase 1 — Scrolling track & restart | Pending |
+| RESTART-01  | Phase 1 — Scrolling track & restart | Complete |
 | DINO-01     | Phase 2 — Dino animation & state machine | Pending |
 | DINO-02     | Phase 2 — Dino animation & state machine | Pending |
 | DINO-03     | Phase 2 — Dino animation & state machine | Pending |
