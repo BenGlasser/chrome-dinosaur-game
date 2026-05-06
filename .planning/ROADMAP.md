@@ -58,7 +58,10 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 03-01: Bird entity model + spawning at multiple heights + scroll integration
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 03-02: Bird sprite-cycle animation + collision wiring into existing game-over path
 
 ## Progress
