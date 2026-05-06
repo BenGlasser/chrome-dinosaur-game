@@ -202,7 +202,9 @@ function update() {
     for (let i = 0; i < birdArray.length; i++) {
         let bird = birdArray[i];
         bird.x += velocityX;
-        context.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height);
+
+        let birdSprite = (Math.floor(frameCount / 12) % 2 == 0) ? bird1Img : bird2Img;
+        context.drawImage(birdSprite, bird.x, bird.y, bird.width, bird.height);
     }
 
     //score
