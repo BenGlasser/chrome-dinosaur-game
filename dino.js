@@ -70,6 +70,14 @@ let score = 0;
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
 let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
+//collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect (drawImage stays at full sprite size)
+let dinoInsetX = 8;
+let dinoInsetY = 4;
+let cactusInsetX = 2;
+let cactusInsetY = 0;
+let birdInsetX = 6;
+let birdInsetY = 6;
+
 //track
 let trackImg;
 let trackWidth = 2404;  //track.png native width
@@ -186,20 +194,21 @@ function update() {
     else if (dinoState == "ducking") dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoDuck1Img : dinoDuck2Img;
     else /* running */               dinoSprite = (Math.floor(frameCount / 6) % 2 == 0) ? dinoRun1Img  : dinoRun2Img;
     context.drawImage(dinoSprite, dino.x, dino.y, dino.width, dino.height);
-    drawHitbox(dino, "red");
+    let dinoHit = hitbox(dino, dinoInsetX, dinoInsetY);
+    drawHitbox(dinoHit, "red");
 
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
-        drawHitbox(cactus, "lime");
+        let cactusHit = hitbox(cactus, cactusInsetX, cactusInsetY);
+        drawHitbox(cactusHit, "lime");
 
-        if (detectCollision(dino, cactus)) {
+        if (detectCollision(dinoHit, cactusHit)) {
             console.log("[collision] cactus", {frame: frameCount, score: score, state: dinoState,
-                dino: {x: dino.x, y: dino.y, w: dino.width, h: dino.height},
-                cactus: {x: cactus.x, y: cactus.y, w: cactus.width, h: cactus.height},
-                gap: {x: cactus.x - (dino.x + dino.width), y: cactus.y - (dino.y + dino.height)}});
+                dino: dinoHit, cactus: cactusHit,
+                gap: {x: cactusHit.x - (dinoHit.x + dinoHit.width), y: cactusHit.y - (dinoHit.y + dinoHit.height)}});
             gameOver = true;
             //draw the dead sprite same-frame; subsequent frames early-return before clearRect, so this paint persists
             context.drawImage(dinoDeadImg, dino.x, dino.y, dino.width, dino.height);
@@ -213,13 +222,13 @@ function update() {
 
         let birdSprite = (Math.floor(frameCount / 12) % 2 == 0) ? bird1Img : bird2Img;
         context.drawImage(birdSprite, bird.x, bird.y, bird.width, bird.height);
-        drawHitbox(bird, "cyan");
+        let birdHit = hitbox(bird, birdInsetX, birdInsetY);
+        drawHitbox(birdHit, "cyan");
 
-        if (detectCollision(dino, bird)) {
+        if (detectCollision(dinoHit, birdHit)) {
             console.log("[collision] bird", {frame: frameCount, score: score, state: dinoState,
-                dino: {x: dino.x, y: dino.y, w: dino.width, h: dino.height},
-                bird: {x: bird.x, y: bird.y, w: bird.width, h: bird.height},
-                gap: {x: bird.x - (dino.x + dino.width), y: bird.y - (dino.y + dino.height)}});
+                dino: dinoHit, bird: birdHit,
+                gap: {x: birdHit.x - (dinoHit.x + dinoHit.width), y: birdHit.y - (dinoHit.y + dinoHit.height)}});
             gameOver = true;
             //draw the dead sprite same-frame; subsequent frames early-return before clearRect, so this paint persists
             context.drawImage(dinoDeadImg, dino.x, dino.y, dino.width, dino.height);
@@ -363,6 +372,15 @@ function detectCollision(a, b) {
            a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
            a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
+}
+
+function hitbox(entity, insetX, insetY) {
+    return {
+        x: entity.x + insetX,
+        y: entity.y + insetY,
+        width:  entity.width  - 2 * insetX,
+        height: entity.height - 2 * insetY
+    };
 }
 
 function drawHitbox(entity, color) {
