@@ -42,6 +42,15 @@ let gravity = .4;
 let gameOver = false;
 let score = 0;
 
+//track
+let trackImg;
+let trackWidth = 2404;  //track.png native width
+let trackHeight = 28;   //track.png native height
+let trackX = 0;
+let trackY = boardHeight - trackHeight; //222 — bottom-aligned under dino/cactus feet
+let track1;
+let track2;
+
 window.onload = function() {
     board = document.getElementById("board");
     board.height = boardHeight;
@@ -67,6 +76,12 @@ window.onload = function() {
 
     cactus3Img = new Image();
     cactus3Img.src = "./img/cactus3.png";
+
+    trackImg = new Image();
+    trackImg.src = "./img/track.png";
+
+    track1 = { img: trackImg, x: trackX,              y: trackY, width: trackWidth, height: trackHeight };
+    track2 = { img: trackImg, x: trackX + trackWidth, y: trackY, width: trackWidth, height: trackHeight };
 
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
