@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-05-06T02:21:46.560Z"
+status: verifying
+stopped_at: Completed 02-dino-animation-state-machine 02-03-PLAN.md
+last_updated: "2026-05-06T02:27:12.973Z"
 last_activity: 2026-05-06
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
-  percent: 80
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-05-05)
 
 Phase: 2 (Dino animation & state machine) — EXECUTING
 Plan: 3 of 3
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-05-06
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [████████░░] 80%
 | Phase 01-scrolling-track-restart P01 | 152 | 2 tasks | 2 files |
 | Phase 01-scrolling-track-restart P02 | 3 | 2 tasks | 1 files |
 | Phase 02 P01 | 15 | 3 tasks | 1 files |
+| Phase 02-dino-animation-state-machine P03 | 2 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,8 @@ Decisions are logged in PROJECT.md Key Decisions table. Recent decisions affecti
 - [Phase ?]: RAF+setInterval self-perpetuate; flipping gameOver=false is sufficient
 - [Phase ?]: Named helper for reset list discoverability; may be called from future game-over UI
 - [Phase ?]: 02-01: Sprite state machine with D-17 ordered update block and same-frame dead draw at collision
+- [Phase ?]: D-18 executed: dropped dino.y==dinoY gate from ArrowDown keydown branch — isDuckHeld set eagerly; state-derivation enforces airborne priority (D-20)
+- [Phase ?]: DINO-04 verified by AABB calculation for Phase 2; empirical confirmation deferred to Phase 3 BIRD-03 (real low obstacles)
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-06T02:21:46.552Z
-Stopped at: Phase 2 context gathered
+Last session: 2026-05-06T02:27:12.967Z
+Stopped at: Completed 02-dino-animation-state-machine 02-03-PLAN.md
 Resume file: None

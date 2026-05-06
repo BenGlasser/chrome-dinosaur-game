@@ -11,7 +11,7 @@ The v1.0 milestone — **sprite animations** — brings the existing static-spri
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Scrolling track & restart** — Tiled scrolling ground replaces the flat background; any-key restart after game over. (completed 2026-05-06)
-- [ ] **Phase 2: Dino animation & state machine** — Dino runs, jumps, and ducks with the right sprite for each state; ducking shrinks the hitbox.
+- [x] **Phase 2: Dino animation & state machine** — Dino runs, jumps, and ducks with the right sprite for each state; ducking shrinks the hitbox. (completed 2026-05-06)
 - [ ] **Phase 3: Bird obstacles** — Birds spawn at multiple heights, flap, and end the game on collision; at least one height requires ducking.
 
 ## Phase Details
@@ -44,7 +44,7 @@ Plans:
 Plans:
 - [x] 02-01: Frame counter + sprite cycling helper; wire dino run cycle (DINO-01)
 - [x] 02-02: Jump state — sprite swap to `dino-jump.png` while airborne (DINO-02)
-- [ ] 02-03: Duck mechanic — ArrowDown handler, duck-cycle, hitbox shrink (DINO-03, DINO-04)
+- [x] 02-03: Duck mechanic — ArrowDown handler, duck-cycle, hitbox shrink (DINO-03, DINO-04)
 
 ### Phase 3: Bird obstacles
 **Goal**: Birds spawn periodically alongside cacti at multiple heights, flap their wings via 2-frame animation, scroll left at game speed, and trigger the same game-over path as cacti on collision. At least one bird height demands the duck mechanic from Phase 2.
@@ -69,5 +69,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Scrolling track & restart | 2/2 | Complete    | 2026-05-06 |
-| 2. Dino animation & state machine | 2/3 | In Progress|  |
+| 2. Dino animation & state machine | 3/3 | Complete   | 2026-05-06 |
 | 3. Bird obstacles | 0/2 | Not started | — |
