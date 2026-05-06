@@ -47,7 +47,6 @@ The current codebase is the result of a YouTube tutorial (linked in README.md). 
 
 ### Out of Scope (v1.0)
 
-- **High-score persistence** — adds storage surface (localStorage) and UI; defer to a later milestone
 - **Difficulty / speed scaling over time** — adds tuning complexity; constant-speed parity with current behavior is fine for v1.0
 - **Score-gated bird appearance** (original game hides birds until score 450+) — explicitly chose to surface birds from the start in v1.0 for simpler tuning; revisit if pacing suffers
 - **Sound effects** — would require asset selection and load handling; out of scope for animation milestone
@@ -86,7 +85,7 @@ The current codebase is the result of a YouTube tutorial (linked in README.md). 
 | Restart in scope (any-key reset) | Without restart, testing animations across deaths means reload-per-iteration; degrades dev loop and player experience | — Pending |
 | Track-only background, no clouds in v1.0 | Smallest scope that achieves "feels like Chrome dino" — clouds are polish | — Pending |
 | Constant-speed (no difficulty scaling) | Animations are independent of speed-scaling; bundling them adds risk without milestone gain | — Pending |
-| No high-score persistence | Pure animation milestone; storage adds an axis of complexity that doesn't serve the goal | — Pending |
+| High-score persistence (HISCORE-01) — promoted to v1 from v2 | Player feedback during post-Phase 3 tuning: a single localStorage write+read on game-over is cheap and noticeably improves replay motivation | — Done (2026-05-06) |
 
 ## Evolution
 

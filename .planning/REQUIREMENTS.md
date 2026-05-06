@@ -29,6 +29,10 @@ Requirements for the **v1.0 milestone — sprite animations**. Each maps to a ro
 
 - [x] **RESTART-01**: After the game-over state, pressing any key resets the game state (dino back to running, obstacles cleared, score zeroed) and starts a new run without a page reload.
 
+### Polish
+
+- [x] **HISCORE-01**: High score persists across sessions via `localStorage` (key: `dinoHighScore`) and is rendered alongside the live score as `HI: <high>   <current>`. Loaded at `window.onload`; written when a finished run beats the previous high. Promoted from v2 during post-Phase 3 tuning.
+
 ## v2 Requirements
 
 Deferred to a future milestone. Tracked but not in current roadmap.
@@ -38,7 +42,6 @@ Deferred to a future milestone. Tracked but not in current roadmap.
 - **PARALLAX-01**: Drifting `cloud.png` sprite for parallax depth above the track.
 - **DIFFICULTY-01**: Game speed (`velocityX`) ramps up over time.
 - **BIRD-LATE-01**: Birds gated by score threshold (original behavior: appear after score 450).
-- **HISCORE-01**: High score persists across sessions via `localStorage` and is rendered alongside the live score.
 - **GAMEOVER-UI-01**: Render `game-over.png` and `reset.png` overlays at game-over instead of relying on the dead-dino sprite swap alone.
 - **AUDIO-01**: Sound effects on jump, point milestone (every 100), and game over.
 
@@ -48,7 +51,6 @@ Explicitly excluded for v1.0. Documented to prevent scope creep.
 
 | Feature | Reason |
 |---------|--------|
-| High-score persistence (`localStorage`) | Animation milestone — storage adds an axis of complexity that doesn't serve the goal. Captured as v2 (HISCORE-01). |
 | Difficulty / speed scaling | Animations are independent of speed scaling; bundling adds tuning risk without milestone gain. Captured as v2 (DIFFICULTY-01). |
 | Score-gated bird appearance | Chose to surface birds from the start in v1.0 for simpler tuning. Captured as v2 (BIRD-LATE-01). |
 | Sound effects | Asset selection + load handling is its own work. Captured as v2 (AUDIO-01). |
@@ -76,12 +78,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BIRD-02     | Phase 3 — Bird obstacles | Pending |
 | BIRD-03     | Phase 3 — Bird obstacles | Pending |
 | BIRD-04     | Phase 3 — Bird obstacles | Pending |
+| HISCORE-01  | Post-Phase 3 tuning (no dedicated phase) | Complete |
 
 **Coverage:**
-- v1 requirements: 10 total
-- Mapped to phases: 10
+- v1 requirements: 11 total
+- Mapped to phases or tuning: 11
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-05*
-*Last updated: 2026-05-05 after initialization*
+*Last updated: 2026-05-06 — promoted HISCORE-01 from v2 to v1 after post-Phase 3 implementation*
