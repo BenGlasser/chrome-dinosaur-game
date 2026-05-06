@@ -66,21 +66,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DINO-01 | TBD | Pending |
-| DINO-02 | TBD | Pending |
-| DINO-03 | TBD | Pending |
-| DINO-04 | TBD | Pending |
-| BIRD-01 | TBD | Pending |
-| BIRD-02 | TBD | Pending |
-| BIRD-03 | TBD | Pending |
-| BIRD-04 | TBD | Pending |
-| BG-01 | TBD | Pending |
-| RESTART-01 | TBD | Pending |
+| BG-01       | Phase 1 — Scrolling track & restart | Pending |
+| RESTART-01  | Phase 1 — Scrolling track & restart | Pending |
+| DINO-01     | Phase 2 — Dino animation & state machine | Pending |
+| DINO-02     | Phase 2 — Dino animation & state machine | Pending |
+| DINO-03     | Phase 2 — Dino animation & state machine | Pending |
+| DINO-04     | Phase 2 — Dino animation & state machine | Pending |
+| BIRD-01     | Phase 3 — Bird obstacles | Pending |
+| BIRD-02     | Phase 3 — Bird obstacles | Pending |
+| BIRD-03     | Phase 3 — Bird obstacles | Pending |
+| BIRD-04     | Phase 3 — Bird obstacles | Pending |
 
 **Coverage:**
 - v1 requirements: 10 total
-- Mapped to phases: 0 (pre-roadmap)
-- Unmapped: 10 ⚠️ (will be resolved by `/gsd-new-milestone` Step 10)
+- Mapped to phases: 10
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-05*
