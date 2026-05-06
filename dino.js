@@ -195,8 +195,8 @@ function moveDino(e) {
         //jump
         velocityY = -10;
     }
-    else if (e.code == "ArrowDown" && dino.y == dinoY) {
-        //duck
+    else if (e.code == "ArrowDown") {
+        isDuckHeld = true;
     }
 
 }
