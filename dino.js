@@ -264,6 +264,43 @@ function placeCactus() {
     }
 }
 
+function placeBird() {
+    if (gameOver) {
+        return;
+    }
+
+    //place bird
+    let bird = {
+        img : bird1Img,    //initial frame; the update() draw loop re-picks per-frame from frameCount (added in plan 03-02)
+        x : cactusX,       //reuse cactusX = 700 — both obstacle types enter from the right edge per D-04
+        y : 0,             //assigned below by the height roll
+        width : birdWidth,
+        height: birdHeight
+    }
+
+    let placeBirdChance = Math.random(); //0 - 0.9999...
+
+    if (placeBirdChance > .80) { //20% no bird — breathing room when a cactus stack would be unfair
+        return;
+    }
+    else if (placeBirdChance > .55) { //25% high (y=birdHighY) — punishes reflexive jumping
+        bird.y = birdHighY;
+        birdArray.push(bird);
+    }
+    else if (placeBirdChance > .30) { //25% mid (y=birdMidY) — must jump
+        bird.y = birdMidY;
+        birdArray.push(bird);
+    }
+    else { //30% low (y=birdLowY) — must duck (depends on Phase 2 D-14 hitbox shrink)
+        bird.y = birdLowY;
+        birdArray.push(bird);
+    }
+
+    if (birdArray.length > 5) {
+        birdArray.shift(); //count-based prune; safe at current scroll speed, see CONCERNS.md §"Latent Bugs" #1
+    }
+}
+
 function resetGame() {
     gameOver = false;
     score = 0;
