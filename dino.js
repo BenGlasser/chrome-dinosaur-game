@@ -198,6 +198,13 @@ function update() {
         }
     }
 
+    //bird
+    for (let i = 0; i < birdArray.length; i++) {
+        let bird = birdArray[i];
+        bird.x += velocityX;
+        context.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height);
+    }
+
     //score
     context.fillStyle="black";
     context.font="20px courier";
