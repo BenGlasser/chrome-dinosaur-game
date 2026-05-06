@@ -27,7 +27,7 @@ The v1.0 milestone — **sprite animations** — brings the existing static-spri
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Tiled scrolling track render
+- [x] 01-01: Tiled scrolling track render
 - [ ] 01-02: Game-state reset on any key after game over
 
 ### Phase 2: Dino animation & state machine
@@ -68,6 +68,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scrolling track & restart | 0/2 | Not started | — |
+| 1. Scrolling track & restart | 1/2 | In Progress|  |
 | 2. Dino animation & state machine | 0/3 | Not started | — |
 | 3. Bird obstacles | 0/2 | Not started | — |

@@ -23,7 +23,7 @@ Requirements for the **v1.0 milestone — sprite animations**. Each maps to a ro
 
 ### Scrolling Background
 
-- [ ] **BG-01**: The ground is rendered as a tiled `track.png` that scrolls left at the same speed as cacti and birds (replacing today's flat `lightgray` canvas + 1px border).
+- [x] **BG-01**: The ground is rendered as a tiled `track.png` that scrolls left at the same speed as cacti and birds (replacing today's flat `lightgray` canvas + 1px border).
 
 ### Restart
 
@@ -66,7 +66,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BG-01       | Phase 1 — Scrolling track & restart | Pending |
+| BG-01       | Phase 1 — Scrolling track & restart | Complete |
 | RESTART-01  | Phase 1 — Scrolling track & restart | Pending |
 | DINO-01     | Phase 2 — Dino animation & state machine | Pending |
 | DINO-02     | Phase 2 — Dino animation & state machine | Pending |
