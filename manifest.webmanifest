@@ -1,0 +1,19 @@
+{
+    "name": "Chrome Dinosaur Game",
+    "short_name": "Dino",
+    "description": "Vanilla-JS clone of the Chrome offline dinosaur game.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "landscape",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "./img/dino.png",
+            "sizes": "88x94",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}

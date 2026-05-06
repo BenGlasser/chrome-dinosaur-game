@@ -3,8 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#ffffff">
         <title>Chrome Dinosaur Game</title>
+        <link rel="manifest" href="./manifest.webmanifest">
+        <link rel="icon" href="./img/dino.png" type="image/png">
         <link rel="stylesheet" href="dino.css">
+        <script>
+            //register the service worker so Chrome can install this as a PWA
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function() {
+                    navigator.serviceWorker.register("./sw.js");
+                });
+            }
+        </script>
         <script src="dino.js"></script>
     </head>
     <body>
