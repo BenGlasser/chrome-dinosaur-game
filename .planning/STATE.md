@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
+status: executing
 stopped_at: Phase 2 context gathered
-last_updated: "2026-05-06T01:48:29.964Z"
+last_updated: "2026-05-06T02:17:48.468Z"
 last_activity: 2026-05-06
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
-  percent: 100
+  total_plans: 5
+  completed_plans: 3
+  percent: 60
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-05)
 
 **Core value:** The game must feel like the real Chrome dino game when you play it.
-**Current focus:** Phase 1 — Scrolling track & restart
+**Current focus:** Phase 2 — Dino animation & state machine
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
-Status: Ready to plan
+Phase: 2 (Dino animation & state machine) — EXECUTING
+Plan: 2 of 3
+Status: Ready to execute
 Last activity: 2026-05-06
 
-Progress: [██████████] 100%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Progress: [██████████] 100%
 *Updated after each plan completion*
 | Phase 01-scrolling-track-restart P01 | 152 | 2 tasks | 2 files |
 | Phase 01-scrolling-track-restart P02 | 3 | 2 tasks | 1 files |
+| Phase 02 P01 | 15 | 3 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,7 @@ Decisions are logged in PROJECT.md Key Decisions table. Recent decisions affecti
 - [Phase ?]: D-09 locked in CONTEXT.md
 - [Phase ?]: RAF+setInterval self-perpetuate; flipping gameOver=false is sufficient
 - [Phase ?]: Named helper for reset list discoverability; may be called from future game-over UI
+- [Phase ?]: 02-01: Sprite state machine with D-17 ordered update block and same-frame dead draw at collision
 
 ### Pending Todos
 
@@ -91,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-06T01:48:29.957Z
+Last session: 2026-05-06T02:17:48.460Z
 Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-dino-animation-state-machine/02-CONTEXT.md
+Resume file: None

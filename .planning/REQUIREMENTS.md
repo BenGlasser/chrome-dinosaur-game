@@ -9,7 +9,7 @@ Requirements for the **v1.0 milestone — sprite animations**. Each maps to a ro
 
 ### Dino Animation
 
-- [ ] **DINO-01**: While the dino is on the ground and the game is running, the player sees a 2-frame running animation cycling between `dino-run1.png` and `dino-run2.png` at a consistent rate (~10 fps so the run reads as a run, not a strobe or a slideshow).
+- [x] **DINO-01**: While the dino is on the ground and the game is running, the player sees a 2-frame running animation cycling between `dino-run1.png` and `dino-run2.png` at a consistent rate (~10 fps so the run reads as a run, not a strobe or a slideshow).
 - [ ] **DINO-02**: While the dino is airborne (mid-jump), the player sees the `dino-jump.png` sprite instead of the running animation.
 - [ ] **DINO-03**: While the player holds ArrowDown and the dino is on the ground, the player sees a 2-frame ducking animation cycling between `dino-duck1.png` and `dino-duck2.png` at the same rate as the run cycle.
 - [ ] **DINO-04**: While ducking, the dino occupies a shorter, wider hitbox so a low-flying bird passes overhead without collision but a ground cactus still collides.
@@ -68,7 +68,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | BG-01       | Phase 1 — Scrolling track & restart | Complete |
 | RESTART-01  | Phase 1 — Scrolling track & restart | Complete |
-| DINO-01     | Phase 2 — Dino animation & state machine | Pending |
+| DINO-01     | Phase 2 — Dino animation & state machine | Complete |
 | DINO-02     | Phase 2 — Dino animation & state machine | Pending |
 | DINO-03     | Phase 2 — Dino animation & state machine | Pending |
 | DINO-04     | Phase 2 — Dino animation & state machine | Pending |

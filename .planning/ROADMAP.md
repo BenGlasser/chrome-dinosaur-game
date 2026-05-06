@@ -42,7 +42,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Frame counter + sprite cycling helper; wire dino run cycle (DINO-01)
+- [x] 02-01: Frame counter + sprite cycling helper; wire dino run cycle (DINO-01)
 - [ ] 02-02: Jump state — sprite swap to `dino-jump.png` while airborne (DINO-02)
 - [ ] 02-03: Duck mechanic — ArrowDown handler, duck-cycle, hitbox shrink (DINO-03, DINO-04)
 
@@ -69,5 +69,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Scrolling track & restart | 2/2 | Complete    | 2026-05-06 |
-| 2. Dino animation & state machine | 0/3 | Not started | — |
+| 2. Dino animation & state machine | 1/3 | In Progress|  |
 | 3. Bird obstacles | 0/2 | Not started | — |
