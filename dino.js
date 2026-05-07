@@ -73,6 +73,13 @@ let highScore = 0; //persisted to localStorage as "dinoHighScore"; loaded in win
 let debugHitbox = false; //toggle with 'd' — strokes AABB hitboxes for collision tuning
 let spawnSeparation = 350; //min px between a cactus and a bird at spawn time — prevents unwinnable cross-type stacks
 
+//tuning sliders — DOM refs assigned in window.onload; read each frame in update()
+//slider state is the source of truth for world scroll speed; the legacy `let velocityX = -4` below is kept as a documenting default but is no longer read
+let speedSlider;
+let rampSlider;
+let speedValue;
+let rampValue;
+
 //collision insets — sprites have transparent padding inside their PNG bounds; shrink the collision rect per side (drawImage stays at full sprite size)
 //dino has two very different sprite shapes (88×94 standing vs 118×60 ducking), so insets are per-state
 let dinoStandingHit = { left: 20, top: 20, right: 24, bottom: 20 }; //run/jump/dead — symmetric so box stays centered on the visible body
@@ -149,6 +156,18 @@ window.onload = function() {
     setInterval(placeBird, 1500); //birds spawn every 1.5 seconds
     document.addEventListener("keydown", moveDino);
     document.addEventListener("keyup", keyUp);
+
+    //tuning sliders — values read live in update() each frame; listeners only sync the numeric readout
+    speedSlider = document.getElementById("speedSlider");
+    rampSlider  = document.getElementById("rampSlider");
+    speedValue  = document.getElementById("speedValue");
+    rampValue   = document.getElementById("rampValue");
+    let syncSpeedReadout = function() { speedValue.textContent = speedSlider.value; };
+    let syncRampReadout  = function() { rampValue.textContent  = rampSlider.value;  };
+    speedSlider.addEventListener("input", syncSpeedReadout);
+    rampSlider.addEventListener("input", syncRampReadout);
+    syncSpeedReadout(); //initial paint in case browser remembered a non-default value
+    syncRampReadout();
 }
 
 function update() {
@@ -183,9 +202,16 @@ function update() {
         return; //skip physics, spawning collision, score++ — RAF keeps re-firing this branch until gameStarted flips
     }
 
+    //per-frame effective scroll velocity — slider speed is the base magnitude; slider ramp scales with score
+    //formula: effective = -(baseSpeed + rampRate * (score / 1000))
+    //defaults speed=4, ramp=0 reproduce the legacy velocityX = -4
+    let baseSpeed = parseFloat(speedSlider.value);
+    let rampRate  = parseFloat(rampSlider.value);
+    let effectiveVelocityX = -(baseSpeed + rampRate * (score / 1000));
+
     //track
-    track1.x += velocityX;
-    track2.x += velocityX;
+    track1.x += effectiveVelocityX;
+    track2.x += effectiveVelocityX;
     if (track1.x + track1.width <= 0) {
         track1.x = track2.x + track2.width;
     }
@@ -237,7 +263,7 @@ function update() {
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
-        cactus.x += velocityX;
+        cactus.x += effectiveVelocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
         let cactusHit = hitbox(cactus, cactusInsetLeft, cactusInsetTop, cactusInsetRight, cactusInsetBottom);
         drawHitbox(cactusHit, "lime");
@@ -255,7 +281,7 @@ function update() {
     //bird
     for (let i = 0; i < birdArray.length; i++) {
         let bird = birdArray[i];
-        bird.x += velocityX;
+        bird.x += effectiveVelocityX;
 
         let birdSprite = (Math.floor(frameCount / 12) % 2 == 0) ? bird1Img : bird2Img;
         context.drawImage(birdSprite, bird.x, bird.y, bird.width, bird.height);
