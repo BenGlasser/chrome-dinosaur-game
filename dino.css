@@ -7,3 +7,27 @@ body {
     background-color: white;
     border-bottom: 1px solid black;
 }
+
+#tuning {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #888;
+}
+
+#tuning label {
+    display: inline-block;
+    margin: 0 12px;
+}
+
+#tuning input[type="range"] {
+    width: 120px;
+    vertical-align: middle;
+    margin: 0 6px;
+}
+
+#tuning span {
+    display: inline-block;
+    min-width: 24px;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+}
