@@ -166,6 +166,15 @@ window.onload = function() {
     let syncRampReadout  = function() { rampValue.textContent  = rampSlider.value;  };
     speedSlider.addEventListener("input", syncSpeedReadout);
     rampSlider.addEventListener("input", syncRampReadout);
+    //block ArrowUp/ArrowDown from adjusting the slider — those keys are reserved for dino jump/duck
+    //preventDefault only; the event still bubbles to the document-level moveDino listener so the dino reacts normally
+    let blockVerticalArrows = function(e) {
+        if (e.code === "ArrowUp" || e.code === "ArrowDown") {
+            e.preventDefault();
+        }
+    };
+    speedSlider.addEventListener("keydown", blockVerticalArrows);
+    rampSlider.addEventListener("keydown", blockVerticalArrows);
     syncSpeedReadout(); //initial paint in case browser remembered a non-default value
     syncRampReadout();
 }
